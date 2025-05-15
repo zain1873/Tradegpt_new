@@ -9,8 +9,7 @@ const ChatArea = ({ toggleWatchlist, watchlistMessage }) => {
   const [apiError, setApiError] = useState(null);
   const messagesEndRef = useRef(null);
 
-  // ✅ Test Key (temporary, replace with your own later)
-  const OPENROUTER_API_KEY = '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';
+  const OPENROUTER_API_KEY = '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';
   const FINNHUB_API_KEY = 'd08gifhr01qh1ecc2v7gd08gifhr01qh1ecc2v80';
 
   const promptCards = [
@@ -21,22 +20,14 @@ const ChatArea = ({ toggleWatchlist, watchlistMessage }) => {
   ];
 
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
   useEffect(() => {
-    if (watchlistMessage) {
-      handleSendWatchlistMessage(watchlistMessage);
-    }
+    if (watchlistMessage) handleSendWatchlistMessage(watchlistMessage);
   }, [watchlistMessage]);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const handleInputChange = (e) => {
-    setInputMessage(e.target.value);
-  };
+  const handleInputChange = (e) => setInputMessage(e.target.value);
 
   const callOpenRouterAPI = async (messageText) => {
     setApiError(null);
@@ -44,7 +35,8 @@ const ChatArea = ({ toggleWatchlist, watchlistMessage }) => {
       const response = await axios.post(
         'https://openrouter.ai/api/v1/chat/completions',
         {
-          model: 'openai/gpt-3.5-turbo', // ✅ Working public model
+          model: 'openai/gpt-4.1',
+          max_tokens: 500,
           messages: [{ role: 'user', content: messageText }],
         },
         {
@@ -57,7 +49,6 @@ const ChatArea = ({ toggleWatchlist, watchlistMessage }) => {
         }
       );
 
-      console.log('✅ API Response:', response.data);
       return response.data.choices?.[0]?.message?.content || 'No response.';
     } catch (error) {
       console.error('❌ OpenRouter API Error:', error.response?.data || error.message);
@@ -79,7 +70,8 @@ const ChatArea = ({ toggleWatchlist, watchlistMessage }) => {
       const aiRes = await axios.post(
         'https://openrouter.ai/api/v1/chat/completions',
         {
-          model: 'openai/gpt-3.5-turbo',
+          model: 'openai/gpt-4.1',
+          max_tokens: 500,
           messages: [
             {
               role: 'user',
