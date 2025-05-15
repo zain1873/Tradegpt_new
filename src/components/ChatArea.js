@@ -9,7 +9,7 @@ const ChatArea = ({ toggleWatchlist, watchlistMessage }) => {
   const [apiError, setApiError] = useState(null);
   const messagesEndRef = useRef(null);
 
-  const OPENROUTER_API_KEY = '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';
+  const OPENROUTER_API_KEY = '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';
   const FINNHUB_API_KEY = 'd08gifhr01qh1ecc2v7gd08gifhr01qh1ecc2v80';
 
   const promptCards = [
