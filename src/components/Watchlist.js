@@ -631,7 +631,7 @@ const StockWatchlist = ({ sendMessageToChat }) => {
   };
 
   return (
-    <div className="w-[300px] flex-shrink-0 bg-[#161b25] border-l border-[#3a3a4c] text-white">
+    <div className="watchlist flex-shrink-0 bg-[#161b25] border-l border-[#3a3a4c] text-white">
       <div className="p-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">

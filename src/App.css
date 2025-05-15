@@ -55,6 +55,9 @@ form input {
   min-height: 65px;
   border-radius: 10px !important;
 }
+.watchlist {
+  width: 300px !important;
+}
 .list-item i {
   font-size: 22px;
 }
